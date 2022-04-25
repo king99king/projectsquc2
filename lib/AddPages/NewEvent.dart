@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:ui';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +24,15 @@ class _NewEventState extends State<NewEvent> {
 
   final DateE=TextEditingController();
 
-  void submitTx(){
+  final meetE=TextEditingController();
+
+ void  submitTx(BuildContext context){
     final entertedCourse=courseE.text;
     final entertedInst=instE.text;
     final entertedPlace=placeE.text;
     final entertedTime=timeE.text;
     final entertedDate=DateE.text;
+    final entertedMeet=meetE.text;
 
     widget.addEv(
       entertedCourse,
@@ -35,6 +40,7 @@ class _NewEventState extends State<NewEvent> {
       entertedPlace,
       entertedTime,
       entertedDate,
+      entertedMeet,
     );
   }
 
@@ -90,14 +96,92 @@ class _NewEventState extends State<NewEvent> {
                 controller: DateE,
                // onSubmitted: (_) =>submitTx(),//_ means null
               ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: 'If the Event online add link of the meet. ',
+                    hintText: 'meet.google.com/xxx-xxxx-xxx',
+                     helperText:  'meet.google.com/xxx-xxxx-xxx',
+                                      ),
+                keyboardType: TextInputType.text,
+                controller: meetE,
+
+                // onSubmitted: (_) =>submitTx(),//_ means null
+              ),
               FlatButton(
-                onPressed: submitTx,
-                child: Text('Add Event'),
-                color:Colors.red, ),
+                onPressed:(){
+                  if(courseE.text!="" && timeE.text!=""&& instE.text!="" && placeE.text!="" && DateE.text!="" ){
+                    submitTx(context);
+                    showAlertDialog1(context);
+                  }else{
+                    showAlertDialog2(context);
+                  }
+
+
+                },
+
+
+                child: Text('Add Event',style: TextStyle(
+                  color: Colors.white,
+                ),),
+                color:Colors.purple[900], ),
             ],
           ),
         ),
 
     );
   }
+}
+
+
+showAlertDialog1(BuildContext context) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: ()=> Navigator.pop(context),
+
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Done!"),
+    content: Text("The Event has been added Successfully"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+showAlertDialog2(BuildContext context) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: ()=> Navigator.pop(context),
+
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Error!"),
+    content: Text("Pleas fill all filds, \n 🖥 if there is no online session leave the link filed empty"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

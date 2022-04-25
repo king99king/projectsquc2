@@ -1,42 +1,40 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:projectsquc/AddPages/NewBankTest.dart';
 import 'package:projectsquc/homePage.dart';
 import 'package:projectsquc/modulus/class.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class testBank extends StatefulWidget {
-  const testBank({Key? key}) : super(key: key);
-
+    const testBank({Key? key}) : super(key: key);
   @override
   _testBankState createState() => _testBankState();
 }
 
 class _testBankState extends State<testBank> {
 
-  final List<course_class> _coursesList = [
-    course_class(
-      courseName:
-        'python',
-        courseCode:
-        'COMP2102'
+  static List<courseBank> _coursesList = [
+    // courseBank(
+    //     courseName: 'courseName',
+    //     courseCode: 'courseCode',
+    //     courseUrl: 'courseUrl'
+    // ),
 
-    ),
-    course_class(
-      courseName:
-        'Java',
-        courseCode:
-        'COMP2202'
-
-    ),
-    course_class(
-      courseName:
-        'Flutter',
-        courseCode:
-        'COMP4206'
-
-    ),
 
   ];
 
+void _addNewBank(String course, String code, String UrlLink){
+  final newBk= courseBank(
+      courseCode: course,
+      courseName: code,
+      courseUrl: UrlLink,
+  );
+  setState(() {
+    _coursesList.add(newBk);
+  });
+}
 
 
 
@@ -131,7 +129,7 @@ class _testBankState extends State<testBank> {
                     return Column(
                       children:[
                         Container(
-                            height:120,
+                            height:165,
                             decoration:BoxDecoration(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(30),
@@ -139,7 +137,17 @@ class _testBankState extends State<testBank> {
                               color:Colors.white,
                             ),
                             child: FlatButton(
-                                onPressed:(){},
+                                onPressed:()
+                                  async {
+                                    final url='${tx.courseUrl}';
+                                    if(
+                                    await canLaunch(url)){
+                                  await launch(url);
+                                  }else if( await canLaunch(url)){
+                                  await launch(url,
+                                  forceSafariVC: false);
+                                  };
+                                },
                                 child: Center(
                                   child: Column(children:[
                                     SizedBox(height:5),
@@ -154,6 +162,24 @@ class _testBankState extends State<testBank> {
                                           borderRadius:BorderRadius.circular(5),
                                           gradient: LinearGradient(colors: [Colors.deepPurple.shade200, Colors.deepPurpleAccent],),),
                                         child:Center(child: Text('Course code: ${tx.courseCode}'))),
+
+                                    FlatButton(
+                                      color: Colors.red.shade600,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft:Radius.circular(30),
+                                            bottomRight:Radius.circular(30),
+                                          )
+                                      ),
+                                      minWidth: 300,
+                                      onPressed: () {
+                                        setState(() {
+                                          _coursesList.remove(tx);
+                                        });
+                                      },
+                                      child: Text('Delete course'),
+
+                                    ),
                                   ],),
                                 )
                             )
@@ -174,7 +200,37 @@ class _testBankState extends State<testBank> {
                       ),
                       color:Colors.purple[900],
                     ),
-                    child: FlatButton(onPressed:(){},
+                    child: FlatButton(onPressed:(){
+                      showModalBottomSheet<void>(
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      context: context,
+                      isScrollControlled: true,
+                          backgroundColor: Colors.purple.shade300,
+                      builder: (BuildContext context) {
+                      return Dialog(
+                        child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.purple.shade300,
+                        child:ListView(
+                          children:[
+                            NewTest(_addNewBank),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.purple.shade900,
+                                ),
+                                child: const Text('Back Courses'),
+                      onPressed: () => Navigator.pop(context),
+                      ),
+                            SizedBox(
+                          height: 800,
+                          ),
+                      ],
+                      ),
+                      ) );});
+                    },
                       child: Row(
                         children: [
                           Icon(Icons.add_box_outlined,color:Colors.white),

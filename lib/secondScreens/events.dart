@@ -1,8 +1,10 @@
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:projectsquc/AddPages/NewEvent.dart';
 import 'package:projectsquc/modulus/class.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../homePage.dart';
 
@@ -17,7 +19,7 @@ class events extends StatefulWidget {
 class _eventsState extends State<events> {
 
   static List<events_class> _eventsList = [
-/*  events_class(
+  /*events_class(
       title:
         'Intro to python',
         person:
@@ -57,13 +59,14 @@ class _eventsState extends State<events> {
 
   ];
 
-  void _addNewEvent(String course, String inst,String place, String time, String Date){
+  void _addNewEvent(String course, String inst,String place, String time, String Date,String MeetUrl){
     final newEv= events_class(
       title: course,
       person: inst,
       time: time,
       location:place,
       date: Date,
+      meetUrl: MeetUrl,
 
     );
     setState(() {
@@ -155,7 +158,7 @@ class _eventsState extends State<events> {
                     children: [
                       Container(
 
-                          height:170,
+                          height:200,
                           decoration:BoxDecoration(
                             borderRadius: BorderRadius.all(
                               Radius.circular(40),
@@ -163,17 +166,27 @@ class _eventsState extends State<events> {
                             color:Colors.white,
                           ),
                           child: FlatButton(
-                              onPressed:(){},
+                              onPressed:()async {
+                                if(tx.meetUrl != ''){
+                                final url='https://${tx.meetUrl}';
+                                if(
+                                await canLaunch(url)){
+                                await launch(url);
+                                }else if( await canLaunch(url)){
+                                await launch(url,
+                                forceSafariVC: false);
+                                }};
+                              },
                               child: Center(
                                 child: Column(children:[
-                                  SizedBox(height:5),
-                                  Container(width:300, height:50,
+                                  SizedBox(height:15),
+                                  Container(width:300, height:40,
                                       decoration:BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
                                         gradient: LinearGradient(colors: [Colors.deepPurple.shade200, Colors.deepPurpleAccent],),),
                                       child:Center(child: Text('Title of Event: ${tx.title}'))),
                                   SizedBox(height:10),
-                                  Container(width:300, height:50,
+                                  Container(width:300, height:40,
                                       decoration:BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
                                         gradient: LinearGradient(colors: [Colors.deepPurple.shade200, Colors.deepPurpleAccent],),),
@@ -199,7 +212,23 @@ class _eventsState extends State<events> {
                                   ),
 
 
-                                ],),
+                                  FlatButton(
+                                    color: Colors.red.shade600,
+                                    shape: RoundedRectangleBorder(
+                                         borderRadius: BorderRadius.only(
+                                             bottomLeft:Radius.circular(30),
+                                              bottomRight:Radius.circular(30),
+                                         )
+                                    ),
+                                    minWidth: double.infinity,
+                                    onPressed: () {
+                                    setState(() {
+                                      _eventsList.remove(tx);
+                                    });
+                                  },
+                                    child: Text('Delete Event'),
+
+                                  )],),
                               )
                           )
                       ),
@@ -224,29 +253,37 @@ class _eventsState extends State<events> {
                 child: FlatButton(
                   onPressed:(){
                       showModalBottomSheet<void>(
+
                       shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       ),
                       context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.purple.shade300,
                       builder: (BuildContext context) {
-                                      return Container(
+                                      return Dialog(
+                                          backgroundColor:  Colors.purple.shade300,
+                                        child: Container(
                                   width: double.infinity,
                                    height: double.infinity,
-                                            color: Colors.red,
+
                                             child:ListView(
                                                 children:[
+                                                  SizedBox(height: 20,),
                                                 NewEvent(_addNewEvent),
                                                   ElevatedButton(
+                                                    style: ElevatedButton.styleFrom(
+                                                      primary: Colors.purple.shade900,
+                                                    ),
                                                     child: const Text('Back Events'),
                                                     onPressed: () => Navigator.pop(context),
+
                                                   ),
-                                                  SizedBox(
-                                                    height: 800,
-                                                  ),
+
                           ],
                       ),
 
-                    );}
+                    ));}
     );
                   },
                   child: Row(

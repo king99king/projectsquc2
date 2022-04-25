@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "393909246572",
+    "project_id": "squcloude",
+    "storage_bucket": "squcloude.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393909246572:android:f5ae129477965a35589649",
+        "android_client_info": {
+          "package_name": "com.example.projectsquc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393909246572-9jpjmhsk0r30q81udfig57t7mo84psse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGH2V1jtuiDQDs02hSKGLFEoxDOob5nhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393909246572-9jpjmhsk0r30q81udfig57t7mo84psse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

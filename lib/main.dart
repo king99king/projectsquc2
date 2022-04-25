@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:projectsquc/fire_base.dart';
 import 'package:projectsquc/setting&splashScreen/wellcomScreen.dart';
 //import 'package:project/setting&splashScreen/wellcomScreen.dart';
 
@@ -6,7 +8,9 @@ import 'package:projectsquc/setting&splashScreen/wellcomScreen.dart';
 //import 'UserPages/signupPage.dart';
 import 'homePage.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),
+      home: WelcomeScreen(),//FireBase(),
     );
   }
 }

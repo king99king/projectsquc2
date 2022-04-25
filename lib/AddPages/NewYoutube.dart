@@ -1,34 +1,30 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../modulus/class.dart';
-class NewTest extends StatefulWidget {
-  final Function addBk;
-  NewTest(this.addBk);
+class NewYoutube extends StatefulWidget {
+  final Function addYt;
+  NewYoutube(this.addYt);
 
   @override
-  State<NewTest> createState() => _NewTestState();
+  State<NewYoutube> createState() => _NewYoutubeState();
 }
 
-class _NewTestState extends State<NewTest> {
+class _NewYoutubeState extends State<NewYoutube> {
   //================================================
   final courseName=TextEditingController();
 
   final courseCode =TextEditingController();
 
-  final courseUrl=TextEditingController();
-
-  void submitTx(BuildContext context){
+  void submitSt(BuildContext context){
     final entertedName=courseName.text;
     final entertedCode=courseCode.text;
-    final entertedUrl=courseUrl.text;
     //===================================
-
-
-    widget.addBk(
+    widget.addYt(
       entertedName,
       entertedCode,
-      entertedUrl,
       //=================================
     );
   }
@@ -40,7 +36,7 @@ class _NewTestState extends State<NewTest> {
         padding: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-            //add text fild
+            //add text field
             //=====================course
             TextField(
               decoration: InputDecoration(
@@ -59,23 +55,18 @@ class _NewTestState extends State<NewTest> {
               //onSubmitted: (_) =>submitTx(),
             ),
             //======================place
-            TextField(
-              decoration: InputDecoration(
-                  labelText: 'google Drive link'
-              ),
-              keyboardType: TextInputType.url,
-              controller: courseUrl,
-              //onSubmitted: (_) =>submitTx(),
-            ),
+
             FlatButton(
               onPressed:(){
-                if(courseName.text!="" && courseCode.text!=""&& courseUrl.text!=""){
-                  submitTx(context);
-                  showAlertDialog1(context);
-                }else{
-                  showAlertDialog2(context);
-                }
-              },
+                    if(courseCode.text!="" && courseName.text!=""){
+                    submitSt(context);
+                    showAlertDialog1(context);
+                    }else{
+                    showAlertDialog2(context);
+                    }
+
+
+    },
               child: Text('Add Course'),
               color:Colors.red, ),
           ],
@@ -111,6 +102,7 @@ showAlertDialog1(BuildContext context) {
     },
   );
 }
+
 showAlertDialog2(BuildContext context) {
 
   // set up the button
@@ -123,7 +115,7 @@ showAlertDialog2(BuildContext context) {
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: Text("Error!"),
-    content: Text("Pleas fill all filds "),
+    content: Text("Pleas fill all filds"),
     actions: [
       okButton,
     ],
