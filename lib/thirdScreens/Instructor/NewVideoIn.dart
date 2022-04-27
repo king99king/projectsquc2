@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projectsquc/Storage_Fire_base.dart';
 class NewVideoIn extends StatefulWidget {
   final Function addIn;
   NewVideoIn(this.addIn);
@@ -11,6 +13,7 @@ class NewVideoIn extends StatefulWidget {
 }
 
 class _NewVideoInState extends State<NewVideoIn> {
+  final Storage storage =Storage();
   //================================================
   final courseName=TextEditingController();
 
@@ -46,13 +49,45 @@ class _NewVideoInState extends State<NewVideoIn> {
             //=====================person
             TextField(
               decoration: InputDecoration(
-                  labelText: 'video url'
+                  labelText: 'Instructor name'
               ),
               keyboardType: TextInputType.text,
               controller: VideoUrl,
               //onSubmitted: (_) =>submitTx(),
             ),
-            //======================place
+            //======================
+            Container(
+              child: ElevatedButton(
+                onPressed: () async{
+                  final result =await FilePicker.platform.pickFiles(
+                      allowMultiple: false,
+                      type: FileType.custom,
+                      allowedExtensions: ['png','jpg','mp4']
+                  );
+                  if(result==null){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("No file Selected"),)
+                    );
+                    return null;
+
+                  }
+                  //store the path of the file from fire_base
+                  final path=result.files.single.path;
+                  // file name
+                  final fileName= result.files.single.name;
+                  // print(path);
+                  // print(fileName);
+                  storage.uploadFile(path!, fileName).then((value) => print('Done'));
+
+
+                },
+
+                child: Text("upload from files",style: TextStyle(color: Colors.white),),
+
+              ),
+
+            ),
 
             FlatButton(
               onPressed:(){
@@ -65,8 +100,8 @@ class _NewVideoInState extends State<NewVideoIn> {
 
 
               },
-              child: Text('Add Course'),
-              color:Colors.red, ),
+              child: Text('Add Course',style: TextStyle(color: Colors.white),),
+              color:Colors.purple.shade900, ),
           ],
         ),
       ),

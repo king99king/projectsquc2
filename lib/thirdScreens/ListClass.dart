@@ -16,12 +16,12 @@ class courseVideos{
 
 class courseVideosSt{
   final String videoTitle;
-  final String videoUrl;
+  final String name;
   final String courseCode;
 
   courseVideosSt({
     required this.videoTitle,
-    required this.videoUrl,
+    required this.name,
     required this.courseCode,
 
   });
@@ -30,14 +30,16 @@ class courseVideosSt{
 
 class courseVideosIn{
   final String videoTitle;
-  final String videoUrl;
+  final String name;
   final String courseCode;
 
   courseVideosIn({
     required this.videoTitle,
-    required this.videoUrl,
+    required this.name,
     required this.courseCode,
 
   });
 
 }
+
+

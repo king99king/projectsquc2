@@ -44,7 +44,7 @@ class _NewTestState extends State<NewTest> {
             //=====================course
             TextField(
               decoration: InputDecoration(
-                  labelText: 'Course Name'
+                  labelText: 'Course Code '
               ),
               keyboardType: TextInputType.text,
               controller: courseName,
@@ -52,7 +52,7 @@ class _NewTestState extends State<NewTest> {
             //=====================person
             TextField(
               decoration: InputDecoration(
-                  labelText: 'course Code'
+                  labelText: 'course Name'
               ),
               keyboardType: TextInputType.text,
               controller: courseCode,

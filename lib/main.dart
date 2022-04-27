@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projectsquc/fire_base.dart';
+import 'package:projectsquc/setting&splashScreen/splashScreen.dart';
 import 'package:projectsquc/setting&splashScreen/wellcomScreen.dart';
 //import 'package:project/setting&splashScreen/wellcomScreen.dart';
 
@@ -19,26 +20,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: '',
       theme: ThemeData(
 
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),//FireBase(),
-    );
-  }
-}
-class Homepage1 extends StatelessWidget {
-  const Homepage1({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-
-        ],
-      ),
+      home: SplashScreen(),//FireBase(),
     );
   }
 }

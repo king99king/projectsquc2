@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _NewYoutubeState extends State<NewYoutube> {
             //=====================course
             TextField(
               decoration: InputDecoration(
-                  labelText: 'Course Name'
+                  labelText: 'Course Code'
               ),
               keyboardType: TextInputType.text,
               controller: courseName,
@@ -48,7 +49,7 @@ class _NewYoutubeState extends State<NewYoutube> {
             //=====================person
             TextField(
               decoration: InputDecoration(
-                  labelText: 'course Code'
+                  labelText: 'course Name'
               ),
               keyboardType: TextInputType.text,
               controller: courseCode,
@@ -67,8 +68,8 @@ class _NewYoutubeState extends State<NewYoutube> {
 
 
     },
-              child: Text('Add Course'),
-              color:Colors.red, ),
+              child: Text('Add Course',style: TextStyle(color: Colors.white),),
+              color:Colors.purple.shade900, ),
           ],
         ),
       ),

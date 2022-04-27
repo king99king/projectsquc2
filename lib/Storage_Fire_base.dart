@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
 
+
 class Storage{
   final firebase_storage.FirebaseStorage storage= firebase_storage.FirebaseStorage.instance;
 //uploade file to fire base
@@ -29,7 +30,7 @@ class Storage{
     return results;
   }
   Future<String> downloadURL(String imagName) async{
-    String downloadURL=await storage.ref('SQUTest/$imagName').getDownloadURL();
+    String downloadURL = await storage.ref('SQUTest/$imagName').getDownloadURL();
     return downloadURL;
 
   }

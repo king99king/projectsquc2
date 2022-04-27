@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -67,8 +68,10 @@ class _NewUrlState extends State<NewUrl> {
 
 
               },
-              child: Text('Add Course'),
-              color:Colors.red, ),
+              child: Text('Add Video',style: TextStyle(
+                color: Colors.white,
+              ),),
+              color:Colors.deepPurple, ),
           ],
         ),
       ),

@@ -1,7 +1,8 @@
-import 'dart:convert';
-
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../Storage_Fire_base.dart';
 class NewVideo extends StatefulWidget {
   final Function addSt;
   NewVideo(this.addSt);
@@ -16,6 +17,7 @@ class _NewVideoState extends State<NewVideo> {
 
   final VideoUrl =TextEditingController();
 
+
   void submitSt(BuildContext context){
     final entertedName=courseName.text;
     final entertedUrl=VideoUrl.text;
@@ -29,6 +31,7 @@ class _NewVideoState extends State<NewVideo> {
 
   @override
   Widget build(BuildContext context) {
+    final Storage storage =Storage();
     return  Card(
       child: Container(
         padding: EdgeInsets.all(10),
@@ -46,7 +49,7 @@ class _NewVideoState extends State<NewVideo> {
             //=====================person
             TextField(
               decoration: InputDecoration(
-                  labelText: 'video url'
+                  labelText: 'student name'
               ),
               keyboardType: TextInputType.text,
               controller: VideoUrl,
@@ -54,6 +57,38 @@ class _NewVideoState extends State<NewVideo> {
             ),
             //======================place
 
+            Container(
+              child: ElevatedButton(
+                onPressed: () async{
+                  final result =await FilePicker.platform.pickFiles(
+                      allowMultiple: false,
+                      type: FileType.custom,
+                      allowedExtensions: ['png','jpg','mp4']
+                  );
+                  if(result==null){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("No file Selected"),)
+                    );
+                    return null;
+
+                  }
+                  //store the path of the file from fire_base
+                  final path=result.files.single.path;
+                  // file name
+                  final fileName= result.files.single.name;
+                  // print(path);
+                  // print(fileName);
+                  storage.uploadFile(path!, fileName).then((value) => print('Done'));
+
+
+                },
+
+                child: Text("upload from files",style: TextStyle(color: Colors.white),),
+
+             ),
+
+            ),
             FlatButton(
               onPressed:(){
                 if(VideoUrl.text!="" && courseName.text!=""){
@@ -65,8 +100,8 @@ class _NewVideoState extends State<NewVideo> {
 
 
               },
-              child: Text('Add Course'),
-              color:Colors.red, ),
+              child: Text('Add  Video',style: TextStyle(color: Colors.white),),
+              color:Colors.purple.shade900, ),
           ],
         ),
       ),

@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:projectsquc/homePage.dart';
 import 'package:projectsquc/setting&splashScreen/wellcomScreen.dart';
+
+import '../Util/AppData.dart';
 
 
 class user extends StatelessWidget {
@@ -31,8 +34,8 @@ class user extends StatelessWidget {
                     ListTile(
                       leading: IconButton(
                         onPressed: (){
-                         // Navigator.push(context,
-                          //    MaterialPageRoute(builder: (context) => welcomescreen()));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => HomePage()));
                         },
                         icon:Icon(Icons.arrow_back),
                         iconSize:40,
@@ -54,7 +57,7 @@ class user extends StatelessWidget {
                       ),
                     ),
                     Center(
-                      child: Text('username',
+                      child: Text(AppData.UserName.toString(),
                       style: TextStyle(
                         fontSize: 30,
                       ))

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectsquc/UserPages/loginPage.dart';
 import 'package:projectsquc/homePage.dart';
 import './userPage.dart';
 class WelcomeScreen extends StatelessWidget {
@@ -71,7 +72,7 @@ class WelcomeScreen extends StatelessWidget {
 
                   onPressed:(){
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) =>HomePage()));
+                        builder: (BuildContext context) =>loginPage()));
 
                   },
                   child: Row(

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projectsquc/UserPages/loginPage.dart';
@@ -6,6 +8,9 @@ import 'package:projectsquc/secondScreens/squ_instructors.dart';
 import 'package:projectsquc/secondScreens/squ_students.dart';
 import 'package:projectsquc/secondScreens/test_bank.dart';
 import 'package:projectsquc/secondScreens/youtube.dart';
+import 'package:projectsquc/setting&splashScreen/userPage.dart';
+
+import 'UserPages/signupPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +20,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         body:SafeArea(
             child: Container(
-              color: Colors.grey.shade100,
+              color: Colors.purple.shade50,
               child: Column(
                   children:<Widget>[
                     Container(
@@ -39,11 +44,12 @@ class HomePage extends StatelessWidget {
                                 SizedBox(width: 250,),
                                 IconButton(onPressed: (){
                                   Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) => loginPage()));
+                                      MaterialPageRoute(builder: (context) => user()));
                                 },
                                   icon:Icon(
-                                    Icons.format_list_bulleted_outlined,
+                                    Icons.person_outline_sharp,
                                     color: Colors.white,
+                                    size: 40,
                                   ),),
                               ],
                             ),
@@ -129,7 +135,10 @@ class HomePage extends StatelessWidget {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(25),
-                                    color: Colors.grey.shade400,
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/images/bg1.png'),
+                                        fit: BoxFit.cover),
+
                                   ),
                                   margin: EdgeInsets.fromLTRB(10,30,10,0),
                                   width: 300,
@@ -137,7 +146,8 @@ class HomePage extends StatelessWidget {
                                   child: Text(
                                     '\nSQU\n Students \n videos',style: TextStyle(
                                     fontFamily: 'Candara',
-                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
                                   ),
                                     textAlign: TextAlign.center,),
                                   alignment: Alignment.center,
@@ -168,7 +178,9 @@ class HomePage extends StatelessWidget {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(25),
-                                    color: Colors.grey.shade400,
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/images/bg1.png'),
+                                        fit: BoxFit.cover),
                                   ),
                                   margin: EdgeInsets.fromLTRB(10,30,10,0),
                                   width: 300,
@@ -177,6 +189,7 @@ class HomePage extends StatelessWidget {
                                     '\nSQU\n Instructors \n videos',style: TextStyle(
                                     fontFamily: 'Candara',
                                     fontSize: 25,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                     textAlign: TextAlign.center,),
                                   alignment: Alignment.center,
@@ -207,7 +220,9 @@ class HomePage extends StatelessWidget {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(25),
-                                    color: Colors.grey.shade400,
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/images/bg1.png'),
+                                        fit: BoxFit.cover),
                                   ),
                                   margin: EdgeInsets.fromLTRB(10,30,10,0),
                                   width: 300,
@@ -215,7 +230,8 @@ class HomePage extends StatelessWidget {
                                   child: Text(
                                     '\nYoutube \n videos',style: TextStyle(
                                     fontFamily: 'Candara',
-                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
                                   ),
                                     textAlign: TextAlign.center,),
                                   alignment: Alignment.center,
@@ -245,7 +261,9 @@ class HomePage extends StatelessWidget {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(25),
-                                    color: Colors.grey.shade400,
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/images/bg1.png'),
+                                        fit: BoxFit.cover),
                                   ),
                                   margin: EdgeInsets.fromLTRB(10,30,10,0),
                                   width: 300,
@@ -253,7 +271,8 @@ class HomePage extends StatelessWidget {
                                   child: Text(
                                     '\nTests \nBank',style: TextStyle(
                                     fontFamily: 'Candara',
-                                    fontSize: 30,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                     textAlign: TextAlign.center,),
                                   alignment: Alignment.center,
